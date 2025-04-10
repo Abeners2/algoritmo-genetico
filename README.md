@@ -33,6 +33,7 @@ pip install -r requirements.txt
 
 4. Execute o aplicativo:
 streamlit run app/interface.py
+```
 
 ## Funcionalidades
 
