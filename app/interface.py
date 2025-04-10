@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import plotly.express as px
 from preprocessamento import processar_tsv
 
 # Configurações da página
@@ -50,33 +51,62 @@ if uploaded_file:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("### 🧬 Top 10 Genes mais associados")
-        top_genes = df['gene'].value_counts().nlargest(10)
-        fig1, ax1 = plt.subplots()
-        sns.barplot(x=top_genes.values, y=top_genes.index, palette='viridis', ax=ax1)
-        ax1.set_xlabel('Quantidade de SNPs Significativos')
-        ax1.set_ylabel('Gene')
-        ax1.set_title(f'Top 10 Genes Associados à {condicao}')
-        st.pyplot(fig1)
+            st.markdown("### 🧬 Top 10 Genes mais associados")
+            top_genes = df['gene'].value_counts().nlargest(10)
+            fig_bar = px.bar(
+        top_genes.sort_values(),
+        x=top_genes.sort_values().values,
+        y=top_genes.sort_values().index,
+        orientation='h',
+        labels={'x': 'Quantidade de SNPs Significativos', 'y': 'Gene'},
+        title=f'Top 10 Genes Associados à {condicao}',
+        color=top_genes.sort_values().values,
+        color_continuous_scale='viridis'
+    )
+    fig_bar.update_layout(height=400, margin=dict(l=40, r=40, t=60, b=40), coloraxis_showscale=False)
+    st.plotly_chart(fig_bar, use_container_width=True)
 
     with col2:
-        st.markdown("### 📊 Distribuição dos P-valores")
-        fig2, ax2 = plt.subplots()
-        sns.histplot(df['p_value'], bins=30, kde=True, color='teal', ax=ax2)
-        ax2.set_xlabel('P-valor')
-        ax2.set_ylabel('Frequência')
-        ax2.set_title('Distribuição dos P-valores Significativos')
-        st.pyplot(fig2)
+            fig_hist = px.histogram(
+        df,
+        x='p_value',
+        nbins=30,
+        title='Distribuição dos P-valores Significativos',
+        labels={'p_value': 'P-valor'},
+        color_discrete_sequence=['teal']
+    )
+    fig_hist.update_layout(height=400, margin=dict(l=40, r=40, t=60, b=40))
+    st.plotly_chart(fig_hist, use_container_width=True)
+
 
     # Dispersão
-    st.markdown("### 🌐 Dispersão dos SNPs vs -log10(P-valor)")
+    st.markdown("### 🌐 Dispersão dos SNPs vs -log10(P-valor) (Interativo)")
+
     df['-log10(p_value)'] = -np.log10(df['p_value'])
-    fig3, ax3 = plt.subplots(figsize=(14, 5))
-    sns.scatterplot(x=range(len(df)), y='-log10(p_value)', data=df, hue='gene', palette='tab10', legend=False, ax=ax3)
-    ax3.set_xlabel('Índice do SNP')
-    ax3.set_ylabel('-log10(P-valor)')
-    ax3.set_title('SNPs Significativos vs -log10(P-valor)')
-    st.pyplot(fig3)
+
+    fig_plotly = px.scatter(
+        df,
+        x=df.index,
+        y='-log10(p_value)',
+        color='gene',
+        hover_data={
+            'snp_id': True,
+            'gene': True,
+            'p_value': True,
+            '-log10(p_value)': ':.2f',
+            'condicao': True
+        },
+        labels={'x': 'Índice do SNP', '-log10(p_value)': '-log10(P-valor)'},
+        title='SNPs Significativos vs -log10(P-valor)'
+    )
+
+    fig_plotly.update_layout(
+        height=500,
+        showlegend=False,
+        margin=dict(l=40, r=40, t=60, b=40)
+    )
+
+    st.plotly_chart(fig_plotly, use_container_width=True)
 
     # Tabela de dados
     st.markdown("### 🔍 Visualização da Tabela de SNPs Significativos")
