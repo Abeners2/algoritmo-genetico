@@ -18,8 +18,8 @@ Facilitar a visualização e identificação de **padrões genéticos** em condi
 
 ## Como Executar Localmente
 
-1. Clone o repositório:
 ```bash
+1. Clone o repositório:
 git clone https://github.com/Abeners2/algoritmo-genetico.git
 cd algoritmo-genetico
 
