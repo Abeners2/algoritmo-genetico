@@ -51,20 +51,25 @@ if uploaded_file:
     col1, col2 = st.columns(2)
 
     with col1:
-            st.markdown("### 🧬 Top 10 Genes mais associados")
-            top_genes = df['gene'].value_counts().nlargest(10)
-            fig_bar = px.bar(
-        top_genes.sort_values(),
-        x=top_genes.sort_values().values,
-        y=top_genes.sort_values().index,
-        orientation='h',
-        labels={'x': 'Quantidade de SNPs Significativos', 'y': 'Gene'},
-        title=f'Top 10 Genes Associados à {condicao}',
-        color=top_genes.sort_values().values,
-        color_continuous_scale='viridis'
-    )
+        st.markdown("### 🧬 Top 10 Genes mais associados")
+        top_genes = df['gene'].value_counts().nlargest(10)
+        top_genes_df = top_genes.sort_values().reset_index()
+        top_genes_df.columns = ['gene', 'count']
+
+        fig_bar = px.bar(
+            top_genes_df,
+            x='count',
+            y='gene',
+            orientation='h',
+            labels={'count': 'Quantidade de SNPs Significativos', 'gene': 'Gene'},
+            title=f'Top 10 Genes Associados à {condicao}',
+            color='count',
+            color_continuous_scale='viridis'
+        )
+
     fig_bar.update_layout(height=400, margin=dict(l=40, r=40, t=60, b=40), coloraxis_showscale=False)
     st.plotly_chart(fig_bar, use_container_width=True)
+
 
     with col2:
             fig_hist = px.histogram(
@@ -122,4 +127,4 @@ if uploaded_file:
     )
 
 else:
-    st.info("📄 Envie um arquivo `.tsv` do GWAS Catalog para começar a análise.")
+    pass
