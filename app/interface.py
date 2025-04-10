@@ -5,11 +5,12 @@ import seaborn as sns
 import numpy as np
 import plotly.express as px
 from preprocessamento import processar_tsv
+from tutorial import mostrar_tutorial
 
 # Configurações da página
 st.set_page_config(page_title="Análise Genética - GWAS", layout="wide")
 sns.set(style="whitegrid")
-
+mostrar_tutorial()
 # Título e descrição
 st.title("🔬 Identificação de Padrões Genéticos - GWAS Catalog")
 st.markdown(
@@ -119,6 +120,7 @@ if uploaded_file:
 
     # Download
     csv = df.to_csv(index=False).encode('utf-8')
+    st.toast("📥 Download iniciado!", icon="✅")
     st.download_button(
         label="📥 Baixar Resultados em CSV",
         data=csv,
