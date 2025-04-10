@@ -16,24 +16,24 @@ Facilitar a visualização e identificação de **padrões genéticos** em condi
 - [NumPy](https://numpy.org/)
 
 
-#### Estrutura do Projeto
+## Estrutura do Projeto
 
 algoritmo-genetico/ 
 ├── app/ 
 │ 
 ├── interface.py 
-###### Interface com Streamlit 
+#### Interface com Streamlit 
 │ 
 ├── preprocessamento.py 
-###### Funções de pré-processamento do .tsv 
+#### Funções de pré-processamento do .tsv 
 ├── dados/ 
-###### Coloque aqui os arquivos .tsv de teste (opcional) 
+#### Coloque aqui os arquivos .tsv de teste (opcional) 
 ├── notebooks/ 
-###### Notebooks exploratórios (se houver) 
+#### Notebooks exploratórios (se houver) 
 ├── resultados/ 
-###### Resultados gerados nas execuções 
+#### Resultados gerados nas execuções 
 ├── README.md 
-###### Este arquivo
+#### Este arquivo
 
 
 
