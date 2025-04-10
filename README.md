@@ -16,31 +16,10 @@ Facilitar a visualização e identificação de **padrões genéticos** em condi
 - [NumPy](https://numpy.org/)
 
 
-## Estrutura do Projeto
-
-algoritmo-genetico/ 
-├── app/ 
-│ 
-├── interface.py 
-#### Interface com Streamlit 
-│ 
-├── preprocessamento.py 
-#### Funções de pré-processamento do .tsv 
-├── dados/ 
-#### Coloque aqui os arquivos .tsv de teste (opcional) 
-├── notebooks/ 
-#### Notebooks exploratórios (se houver) 
-├── resultados/ 
-#### Resultados gerados nas execuções 
-├── README.md 
-#### Este arquivo
-
-
-
 ## Como Executar Localmente
 
-1. Clone o repositório:
 ```bash
+1. Clone o repositório:
 git clone https://github.com/Abeners2/algoritmo-genetico.git
 cd algoritmo-genetico
 
@@ -54,6 +33,7 @@ pip install -r requirements.txt
 
 4. Execute o aplicativo:
 streamlit run app/interface.py
+```
 
 ## Funcionalidades
 
