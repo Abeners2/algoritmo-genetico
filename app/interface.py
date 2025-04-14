@@ -120,13 +120,13 @@ if uploaded_file:
 
     # Download
     csv = df.to_csv(index=False).encode('utf-8')
-    st.toast("📥 Download iniciado!", icon="✅")
     st.download_button(
         label="📥 Baixar Resultados em CSV",
         data=csv,
         file_name="resultados_significativos.csv",
         mime='text/csv'
     )
+    {st.toast.success("✅ Download concluído com sucesso!")}
 
 else:
     pass
