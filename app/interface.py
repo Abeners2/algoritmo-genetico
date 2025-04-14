@@ -126,7 +126,8 @@ if uploaded_file:
         file_name="resultados_significativos.csv",
         mime='text/csv'
     )
-    {st.toast.success("✅ Download concluído com sucesso!")}
+    if btn:
+        st.toast("Resultados baixados com sucesso!", icon="✅")
 
 else:
     pass
