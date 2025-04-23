@@ -52,9 +52,9 @@ streamlit run app/interface.py
 
 ## 👨‍👩‍👧‍👦 Equipe
 
-- **Abner** – Desenvolvimento, lógica de análise, integração Streamlit
+- **Abner Lucas** – Desenvolvimento, lógica de análise, integração Streamlit
 - **Ana Júlia** – Apoio biomédico e validação científica
-- **Evie** – Apoio biomédico e levantamento de dados
+- **Hevillyn Pains** – Apoio biomédico e levantamento de dados
 
 ## 🌍 Licença
 
